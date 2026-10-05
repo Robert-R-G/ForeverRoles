@@ -8,8 +8,9 @@
 	  target / focus   above the portrait
 	  nameplates       above the name (friendly nameplates inside instances
 	                   are off-limits to addons, so none show there)
-	  group frames     the raid-style party and raid frames (top-right corner)
-	                   and the classic party frames (above the portrait)
+	  party frames     the classic party frames (above the portrait). Not the
+	                   raid-style group frames: they already show Blizzard's
+	                   own role icon, and a second one only doubled it.
 	  tooltip          a line under the player's name
 ]]
 
@@ -120,24 +121,6 @@ end
 -- Group frames
 ---------------------------------------------------------------------------
 
-local compactIcons = setmetatable({}, { __mode = "k" }) -- CompactUnitFrame -> icon
-
-local function UpdateCompact(frame)
-	if not frame or (frame.IsForbidden and frame:IsForbidden()) then return end
-	local unit = ns.Readable(frame.unit)
-	local role = unit and ns.db.show.group and ns.RoleFor(unit) or nil
-	local icon = compactIcons[frame]
-	if not icon then
-		if not role then return end
-		icon = NewIcon(14)
-		icon:SetParent(frame)
-		icon:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -2, -2)
-		icon:SetFrameLevel((frame:GetFrameLevel() or 1) + 10)
-		compactIcons[frame] = icon
-	end
-	Apply(icon, role)
-end
-
 local partyIcons = {}
 
 local function UpdateParty()
@@ -156,11 +139,6 @@ local function UpdateParty()
 			Apply(icon, ns.db.show.group and Visible(frame) and ns.RoleFor(unit) or nil)
 		end
 	end
-end
-
-local function UpdateCompactAll()
-	for frame in pairs(compactIcons) do UpdateCompact(frame) end
-	-- Frames that have not been seen yet are picked up by the hook below.
 end
 
 ---------------------------------------------------------------------------
@@ -186,7 +164,6 @@ local function RefreshAll()
 	if not ns.db then return end
 	UpdateTargets()
 	UpdatePlates()
-	UpdateCompactAll()
 	UpdateParty()
 end
 table.insert(ns.listeners, RefreshAll)
@@ -210,10 +187,6 @@ function ns.OnLoad()
 	for _, e in ipairs({ "NAME_PLATE_UNIT_ADDED", "NAME_PLATE_UNIT_REMOVED", "PLAYER_TARGET_CHANGED",
 		"PLAYER_FOCUS_CHANGED", "UNIT_NAME_UPDATE" }) do
 		pcall(events.RegisterEvent, events, e)
-	end
-	-- Raid-style frames: every time Blizzard assigns or refreshes one.
-	for _, fn in ipairs({ "CompactUnitFrame_SetUnit", "CompactUnitFrame_UpdateAll" }) do
-		if type(_G[fn]) == "function" then hooksecurefunc(fn, function(frame) pcall(UpdateCompact, frame) end) end
 	end
 	if TooltipDataProcessor and Enum and Enum.TooltipDataType and Enum.TooltipDataType.Unit then
 		TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip) pcall(TooltipLine, tooltip) end)

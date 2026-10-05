@@ -7,10 +7,10 @@ Mark players as **tank**, **healer** or **DPS** in **WoW Forever**, and see thei
 - **Right-click any player** → **Mark as** → Tank, Healer or DPS. Also **No icon**, to hide a player's icon, and **Use group role**, to go back to the role the group assigned.
 - **Auto-marks from group roles.** Players get the icon for the role the Group Finder or a role check gave them. Tanks, healers and DPS each have their own on/off switch, and your own marks always win.
 - **Shared with your group.** Groupmates who also run Forever Roles see your marks and you see theirs, through the hidden addon channel, so nothing appears in chat.
-- **Shows where you look:**
+- **Shows where you look** (raid-style group frames already show Blizzard's own role icon, so they're left alone):
   - above the target and focus portraits
   - above names on nameplates
-  - on party and raid frames
+  - above the portraits on the classic party frames
   - as a line in the tooltip
 
   Each one can be turned off.

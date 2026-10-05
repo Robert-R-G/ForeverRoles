@@ -65,7 +65,7 @@ y = y - 32
 for _, place in ipairs({
 	{ "target", "Target and focus frames", "Above the portrait of your target and focus." },
 	{ "nameplates", "Nameplates", "Above the name. Friendly nameplates inside dungeons are off-limits to addons." },
-	{ "group", "Party and raid frames", "On the party frames and the raid-style group frames." },
+	{ "group", "Party frames", "Above the portraits on the classic party frames. The raid-style group frames already show Blizzard's own role icon." },
 	{ "tooltip", "Tooltip", "A line under the player's name when you mouse over them." },
 }) do
 	local key = place[1]
