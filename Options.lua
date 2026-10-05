@@ -64,7 +64,7 @@ Heading("Show icons on", y - 10)
 y = y - 32
 for _, place in ipairs({
 	{ "target", "Target and focus frames", "Above the portrait of your target and focus." },
-	{ "nameplates", "Nameplates", "Left of the name. Friendly nameplates inside dungeons are off-limits to addons." },
+	{ "nameplates", "Nameplates", "Above the name. Friendly nameplates inside dungeons are off-limits to addons." },
 	{ "group", "Party and raid frames", "On the party frames and the raid-style group frames." },
 	{ "tooltip", "Tooltip", "A line under the player's name when you mouse over them." },
 }) do

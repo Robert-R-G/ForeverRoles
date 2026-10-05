@@ -9,7 +9,7 @@ Mark players as **tank**, **healer** or **DPS** in **WoW Forever**, and see thei
 - **Shared with your group.** Groupmates who also run Forever Roles see your marks and you see theirs, through the hidden addon channel, so nothing appears in chat.
 - **Shows where you look:**
   - above the target and focus portraits
-  - next to names on nameplates
+  - above names on nameplates
   - on party and raid frames
   - as a line in the tooltip
 

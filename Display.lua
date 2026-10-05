@@ -6,7 +6,7 @@
 	an icon belongs to is kept in this file's own tables.
 
 	  target / focus   above the portrait
-	  nameplates       left of the name (friendly nameplates inside instances
+	  nameplates       above the name (friendly nameplates inside instances
 	                   are off-limits to addons, so none show there)
 	  group frames     the raid-style party and raid frames (top-right corner)
 	                   and the classic party frames (above the portrait)
@@ -87,11 +87,12 @@ local plateIcons = setmetatable({}, { __mode = "k" }) -- nameplate -> icon
 local function PlateIcon(plate)
 	local icon = plateIcons[plate]
 	if icon then return icon end
-	icon = NewIcon(16)
+	icon = NewIcon(18)
 	icon:SetParent(plate)
 	local uf = plate.UnitFrame
 	local anchor = uf and (uf.name or uf.HealthBarsContainer) or plate
-	icon:SetPoint("RIGHT", anchor, "LEFT", -2, 0)
+	-- Centred just above the name, where it reads at a glance.
+	icon:SetPoint("BOTTOM", anchor, "TOP", 0, 2)
 	plateIcons[plate] = icon
 	return icon
 end
